@@ -1,0 +1,25 @@
+pipeline {
+    agent any
+    stages {
+        stage('Build da imagem docker') {
+            steps {
+                sh 'docker build -t devops/app .'
+            }
+        }
+        stage('Subir docker-compose - Redis e APP') {
+            steps {
+                sh 'docker-compose up --build -d'
+            }
+        }
+        stage('Esperando subida do container') {
+            steps {
+                sh 'sleep 10'
+            }
+        }
+        stage('Teste da aplicação') {
+            steps {
+                sh 'teste-app.sh'
+            }
+        }
+    }
+}
