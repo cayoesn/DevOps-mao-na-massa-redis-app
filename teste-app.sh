@@ -3,7 +3,7 @@
 RESULT="`wget -q0 - http://localhost:8090`"
 wget -q localhost:8090
 
-if [$? -eq 0]
+if [ $? -eq 0 ]
 then
     echo "OK - Serviço ativo"
 elif [[$RESULT == *Number* ]]
