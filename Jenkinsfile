@@ -16,6 +16,16 @@ pipeline {
                 sh 'sleep 10'
             }
         }
+        stage('Sonarqube validations') {
+            steps {
+                script {
+                    scannerHome = tool 'sonar-scanner';
+                }
+                withSonarQubeEnv('sonar-server') {
+                    sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=redis-app -Dsonar.sources=. -Dsonar.host.url=${env.SONAR_HOST_URL} -Dsonar.login=${env.SONAR_AUTH_TOKEN}" 
+                }
+            }
+        }
         stage('Teste da aplicação') {
             steps {
                 sh 'chmod +x ./teste-app.sh'
