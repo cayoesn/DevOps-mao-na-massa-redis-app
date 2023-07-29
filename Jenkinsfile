@@ -59,7 +59,7 @@ pipeline {
         }
         stage('Apply k8s files') {
             steps {
-                sh "sed -i -e 's#TAG#${TAG}' ./k3s/redis-app.yml"
+                sh "sed -i -e 's#TAG#${TAG}#' ./k3s/redis-app.yml"
                 sh '/usr/local/bin/kubectl apply -f ./k3s/redis.yml'
                 sh '/usr/local/bin/kubectl apply -f ./k3s/redis-app.yml'
             }
