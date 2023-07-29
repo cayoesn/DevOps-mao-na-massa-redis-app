@@ -1,7 +1,7 @@
 pipeline {
     agent any
     environment {
-        TAG = sh(script: 'git describe --abrev=0 --tags', returnStdout: true).trim()
+        TAG = sh(script: 'git describe --abbrev=0 --tags',,returnStdout: true).trim()
     }
     stages {
         stage('Build da imagem docker') {
